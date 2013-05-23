@@ -13,6 +13,12 @@ module CodeChallenge
         challenge.main
       end
 
+      it "runs prime number generation" do
+        prime = double('prime')
+        primes = PrimeNumber.new(prime)
+
+        prime.should_receive(:array).with([2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
+      end
     end
   end
 end
