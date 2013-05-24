@@ -27,6 +27,14 @@ describe PrimeNumber do
       it "should initialise 'up_to' with '10'" do
         pm.up_to.should == 10
       end
+
+      it "should create an empty 'primes' array" do
+        pm.primes.should be_empty
+      end
+
+      it "should create an empty 'candidates' array" do
+        pm.candidates.should be_empty
+      end
     end
 
     context "range generation" do
@@ -68,5 +76,18 @@ describe PrimeNumber do
       end
     end
 
+    describe "prime number calculation" do
+
+      context "prime number array" do
+
+        # simply add the only even number which is a prime number
+        # to the prime numbers array
+        it "should add '2' to 'prime_numbers' array" do
+          prime_numbers = pm.<<(2)
+          prime_numbers.should include(2)
+          prime_numbers.should have(1).items
+        end
+      end
+    end
   end
 end

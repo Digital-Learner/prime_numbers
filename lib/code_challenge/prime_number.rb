@@ -1,7 +1,10 @@
 class PrimeNumber
+  attr_reader :primes, :candidates
 
   def initialize(up_to)
     @up_to = up_to
+    @candidates = []
+    @primes = []
   end
 
   def up_to
@@ -15,6 +18,10 @@ class PrimeNumber
   end
 
   def create_candidates_array
-    generate_range.to_a.delete_if { |num| num.even? }
+    @candidates = generate_range.to_a.delete_if { |num| num.even? }
+  end
+
+  def <<(prime_number)
+    @primes << prime_number
   end
 end
