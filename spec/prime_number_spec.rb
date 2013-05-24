@@ -54,6 +54,18 @@ describe PrimeNumber do
       it "should not contain '1, 2, 4, 100, 101'" do
         pm.create_candidates_array.should_not include(1, 2, 4, 100, 101)
       end
+
+      it "should have minimum of '3'" do
+        pm.create_candidates_array.min.should == 3
+      end
+
+      it "should have maximum of '99'" do
+        pm.create_candidates_array.max.should eq 99
+      end
+
+      it "should have size of '49' elements" do
+        pm.create_candidates_array.size.should == 49
+      end
     end
 
   end
