@@ -137,6 +137,21 @@ describe PrimeNumber do
         end
       end
 
+      context "iterates over all 'candidates' until 'up_to' number reached" do
+        let(:prime_numbers) { pm.main }
+
+        it "has 'up_to' prime numbers in 'prime_numbers' array" do
+          prime_numbers.should have(10).items
+        end
+
+        it "should contain prime numbers in 'prime_numbers' array" do
+          prime_numbers.should include(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)
+        end
+
+        it "should not contain numbers which are outside 'nth' range" do
+          prime_numbers.should_not include(31, 37)
+        end
+      end
     end
   end
 end

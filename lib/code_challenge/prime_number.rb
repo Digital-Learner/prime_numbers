@@ -38,4 +38,15 @@ class PrimeNumber
     # when simply assessing 'n(and multiples of) mod n == 0'
     @candidates.delete_if(&divisable_by(first_element))
   end
+
+  def main
+    create_candidates_array
+    @prime_numbers << 2
+    until @prime_numbers.size == up_to
+      move_zeroth_element_to_primes
+      delete_multiples_of_zeroth_element(@candidates[0])
+    end
+    @prime_numbers
+
+  end
 end
