@@ -14,6 +14,7 @@ module CodeChallenge
       end
 
       it "runs prime number generation" do
+        pending
         prime = double('prime')
         primes = PrimeNumber.new(prime)
 

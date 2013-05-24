@@ -18,6 +18,8 @@ describe PrimeNumber do
   #    Otherwise, let p now equal this number (which is the next prime), and repeat from step 3.
   # When the algorithm terminates, all the numbers in the list that are not marked are prime.
 
+
+
   describe "Generate 1st 'n' prime numbers" do
 
     context "initialization" do
@@ -28,5 +30,32 @@ describe PrimeNumber do
       end
     end
 
+    context "range generation" do
+      # take the number of primes to find and create a range 
+      # which is n squared and only odd numbers (approximation)
+      it "creates range from 2 to the square of 'up_to' numbers" do
+        pm = PrimeNumber.new(10).generate_range
+        pm.should cover(2, 3, 99, 100)
+      end
+
+      it "created range should not include 1 or 101" do
+        pm = PrimeNumber.new(10).generate_range
+        pm.should_not cover(1, 101)
+      end
+    end
+
+    context "creates array of odd numbers generation from range" do
+
+      it "should contain '3, 5, 97, 99'" do
+        pm = PrimeNumber.new(10)
+        pm.create_candidates_array.should include(3, 5, 97, 99)
+      end
+
+      it "should not contain '1, 2, 4, 100, 101'" do
+        pm = PrimeNumber.new(10)
+        pm.create_candidates_array.should_not include(1, 2, 4, 100, 101)
+      end
+    end
+    
   end
 end
