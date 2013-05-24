@@ -24,4 +24,18 @@ class PrimeNumber
   def <<(prime_number)
     @prime_numbers << prime_number
   end
+
+  def move_zeroth_element_to_primes
+    @prime_numbers <<@candidates.first
+  end
+
+  def divisable_by(divisor)
+    lambda { |element| element % divisor == 0}
+  end
+
+  def delete_multiples_of_zeroth_element(first_element)
+    # use lambda here as returned empty candidates array
+    # when simply assessing 'n(and multiples of) mod n == 0'
+    @candidates.delete_if(&divisable_by(first_element))
+  end
 end

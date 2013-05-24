@@ -93,6 +93,41 @@ describe PrimeNumber do
           @prime_numbers.should have(1).items
         end
       end
+
+      context "adds 1st element of 'candidates' to 'prime_numbers' and removes from 'candidates'" do
+        before(:each) do
+          @candidates = pm.create_candidates_array
+          @prime_numbers = pm.move_zeroth_element_to_primes
+        end
+
+        it "adds 1st element of 'candidates' array to 'prime_numbers' array" do
+          @candidates[0].should == 3
+          @prime_numbers.should include(3)
+        end
+
+        it "'prime_numbers' should have 1 item" do
+          @prime_numbers.should have(1).items
+        end
+
+        it "'prime_numbers' should contain '2, 3' when starting from 2" do
+          @prime_numbers = pm<<(2)
+          @prime_numbers.should include(2,3)
+        end
+
+        context "removes 1st and all multiples of 1st element from 'candidates' array" do
+          it "should not include '3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99'" do
+            @candidates[0].should == 3
+            @candidates = pm.delete_multiples_of_zeroth_element(@candidates.first)
+            @candidates.should_not include(3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99)
+          end
+
+          it "should have '32' items" do
+            @candidates = pm.delete_multiples_of_zeroth_element(@candidates.first)
+            @candidates.should have(32).items
+          end 
+        end
+      end
+
     end
   end
 end
