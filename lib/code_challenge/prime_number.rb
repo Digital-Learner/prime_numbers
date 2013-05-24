@@ -1,10 +1,10 @@
 class PrimeNumber
-  attr_reader :primes, :candidates
+  attr_reader :prime_numbers, :candidates
 
   def initialize(up_to)
     @up_to = up_to
     @candidates = []
-    @primes = []
+    @prime_numbers = []
   end
 
   def up_to
@@ -22,6 +22,6 @@ class PrimeNumber
   end
 
   def <<(prime_number)
-    @primes << prime_number
+    @prime_numbers << prime_number
   end
 end
