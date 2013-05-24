@@ -9,6 +9,8 @@ class PrimeNumber
   end
 
   def generate_range
+    # take the number of primes to find and create a range 
+    # which is n squared and only odd numbers (approximation)
     Range.new(2, up_to**2)
   end
 
