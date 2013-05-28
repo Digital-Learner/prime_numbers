@@ -14,11 +14,13 @@ module CodeChallenge
       end
 
       it "runs prime number generation" do
-        pending
+        # pending
         prime = double('prime')
         primes = PrimeNumber.new(prime)
 
         prime.should_receive(:array).with([2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
+
+        puts primes.main
       end
     end
   end
