@@ -1,4 +1,5 @@
 class PrimeNumber
+  include Math
   attr_reader :prime_numbers, :candidates
 
   def initialize(up_to)
@@ -11,10 +12,22 @@ class PrimeNumber
     @up_to
   end
 
+  def range_upper_limit
+    # Need to calculate approximation of maximum value for range.
+    # Use this approximation and modify to use nn > 3
+    # Source: http://stackoverflow.com/questions/1042902/most-elegant-way-to-generate-prime-numbers/1043247
+    n = up_to
+
+    if (n >= 7022) 
+      upper_limit = n * Math.log(n) + n * (Math.log(Math.log(n)) - 0.9385)
+    elsif (n >= 6)
+      upper_limit = n * Math.log(n) + n * Math.log(Math.log(n))
+    end
+    upper_limit.round   
+  end
+
   def generate_range
-    # take the number of primes to find and create a range 
-    # which is n squared and only odd numbers (approximation)
-    Range.new(2, up_to**2)
+    Range.new(2, range_upper_limit)
   end
 
   def create_candidates_array

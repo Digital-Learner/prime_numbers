@@ -37,42 +37,64 @@ describe PrimeNumber do
       end
     end
 
+
     context "range generation" do
+
+      context "upper range limit" do
+        # Need to calculate approximation of maximum value for range.
+        # Use this approximation and modify to use nn > 3
+        # Source: http://stackoverflow.com/questions/1042902/most-elegant-way-to-generate-prime-numbers/1043247
+
+        it "should have a 'range_upper_limit' of 31 when 'n=10'" do
+          pm.range_upper_limit.should eq 31
+        end
+
+        it "should have a 'range_upper_limit' of 77497 when 'n=7021'" do
+          pm = PrimeNumber.new(7021)
+          pm.range_upper_limit.should eq 77497
+        end
+
+        it "should have a 'range_upper_limit' of 70919 when 'n=7022" do
+          pm = PrimeNumber.new(7022)
+          pm.range_upper_limit.should eq 70919
+        end
+      end
+
       before(:each) do
         @pm = PrimeNumber.new(10).generate_range 
       end
 
       # take the number of primes to find and create a range 
       # which is n squared and only odd numbers (approximation)
-      it "creates range from 2 to the square of 'up_to' numbers" do
-        @pm.should cover(2, 3, 99, 100)
+      it "creates range from 2 to the value of 'range_upper_limit' numbers" do
+        @pm.should cover(2, 3, 27, 29, 31)
       end
 
-      it "created range should exclude numbers outside the range '(1, 101)'" do
-        @pm.should_not cover(1, 101)
+      it "created range should exclude numbers outside the range '(1, 31)'" do
+        @pm.should_not cover(1, 32, 101)
       end
     end
 
     context "creates array of odd numbers generation from range" do
 
-      it "should contain '3, 5, 97, 99'" do
-        pm.create_candidates_array.should include(3, 5, 97, 99)
+      it "should contain '3, 5, 27, 31'" do
+        pm.create_candidates_array.should include(3, 5, 27, 31)
       end
 
-      it "should not contain '1, 2, 4, 100, 101'" do
-        pm.create_candidates_array.should_not include(1, 2, 4, 100, 101)
+      it "should not contain '1, 2, 4, 32, 100, 101'" do
+        pm.create_candidates_array.should_not include(1, 2, 4, 32, 100, 101)
       end
 
       it "should have minimum of '3'" do
         pm.create_candidates_array.min.should == 3
       end
 
-      it "should have maximum of '99'" do
-        pm.create_candidates_array.max.should eq 99
+      it "should have maximum of '31'" do
+        pm.create_candidates_array.max.should eq 31
       end
 
-      it "should have size of '49' elements" do
-        pm.create_candidates_array.size.should == 49
+      it "should have size of '15' elements" do
+        pm.create_candidates_array.size.should == 15
       end
     end
 
@@ -120,20 +142,20 @@ describe PrimeNumber do
           @candidates = pm.create_candidates_array
         end
 
-        it "should not include '3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99'" do
+        it "should not include '3, 9, 15, 21, 27'" do
           @candidates[0].should == 3
           @candidates = pm.delete_multiples_of_zeroth_element(@candidates.first)
-          @candidates.should_not include(3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99)
+          @candidates.should_not include(3, 9, 15, 21, 27)
         end
 
-        it "should have '32' items" do
+        it "should have '10' items" do
           @candidates = pm.delete_multiples_of_zeroth_element(@candidates.first)
-          @candidates.should have(32).items
+          @candidates.should have(10).items
         end
 
         it "should include numbers not divisable by '3' when starting from '2'" do
           @candidates = pm.delete_multiples_of_zeroth_element(@candidates.first)
-          @candidates.should include(5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 89, 91, 95, 97)
+          @candidates.should include(5, 7, 11, 13, 17, 19, 23, 25, 29, 31)
         end
       end
 
